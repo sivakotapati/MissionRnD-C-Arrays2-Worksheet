@@ -24,45 +24,47 @@ struct transaction {
 int is_lesser(char *, char *);
 void get_year_month_date(char *, int *, int *, int *);
 struct transaction * mergeSortedArrays(struct transaction *A, int ALen, struct transaction *B, int BLen) {
-	if (A == NULL || B == NULL || ALen <= 0 || BLen <= 0)//checking for invlaid inputs
-	{
+	if (A == NULL || B == NULL || ALen <= 0 || BLen <= 0){
 		return NULL;
 	}
-	
-	//c for storing result of sorting two sorted linked lists
-	struct transaction *c = (struct transaction *)malloc((ALen + BLen)*sizeof(struct transaction));
+	//struct transaction *i;
+	//struct transaction *j;
+	struct transaction *result = (struct transaction *)malloc((ALen + BLen)*sizeof(struct transaction));
+	//i = A;
+	//j = B;
+	int i, j;
 
-	int i, j,k;
-	
-	//i is index of A
-	//j is index of B
-	//k is index of c
-	i = 0, j = 0, k = 0;
-	while( i < ALen&&j < BLen){
+	i = 0; j = 0;
+	int k = 0;
+	while (i < ALen&&j < BLen){
 
-		//check A[i].date or B[j].date is lesser
-		int r= is_lesser(A[i].date, B[j].date);
-		if (r == 1){
-			//if A[i].date is lesser then  copy A[i] to C[k]
-			c[k++] = A[i++];
+		//if A[i].date is lesser than B[j].date
+		int greater = is_lesser(A[i].date, B[j].date);
+		if (greater == 1){
+			result[k] = A[i];
+			i++;
 		}
-		else if (r == 2){
-			//if B[i].date is lesser then copy A[i] to C[k]
-			c[k++] = B[j++];
+		else if (greater == 2){
+			result[k] = B[j];
+			j++;
 		}
+		k++;
+
 	}
 
-	//if we completed all elements in B then copy A to c
+	//if B is completed then copy remaining A to Result
 	while (i < ALen){
-		c[k++]= A[i];
+		result[k] = A[i];
+		k++; i++;
 	}
 
-	//if we completed all elements in A then copy B to c
+	//if A is completed then copy remaining B to Result
 	while (j < BLen){
-		c[k++]= B[j++];
+		result[k] = B[j];
+		k++; j++;
 	}
 
-	return c; //returning base address of array which is  sorted 
+	return result; //returning base address of array which is  sorted */
 }
 int is_lesser(char *a, char *b){
 
