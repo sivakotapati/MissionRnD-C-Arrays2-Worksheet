@@ -32,7 +32,7 @@ int findSingleOccurenceNumber(int *A, int len) {
 		}
 	}
 
-	int *count = (int *)malloc(max*sizeof(int));
+	int *count = (int *)malloc((max+1)*sizeof(int));
 
 	//intitializing count of every number to zero
 	for (i = 0; i <= max; i++){
