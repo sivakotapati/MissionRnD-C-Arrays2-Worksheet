@@ -16,7 +16,7 @@ complexity .
 */
 #include<stdio.h>
 #include<malloc.h>
-//void sort(int *, int);
+
 int findSingleOccurenceNumber(int *A, int len) {
 
 	//returns element that occured only once in the array,returns -1 in error cases
