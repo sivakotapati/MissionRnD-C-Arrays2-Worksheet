@@ -23,7 +23,46 @@ struct transaction {
 	char date[11];
 	char description[20];
 };
-
+int is_equal(char *,char *);
 struct transaction * sortedArraysCommonElements(struct transaction *A, int ALen, struct transaction *B, int BLen) {
-	return NULL;
+
+	if (A == NULL || B == NULL || ALen <= 0 || BLen <= 0){  //checking for invalid inputs
+		return NULL;
+	}
+	int i, j,k=0,common_size;
+
+	//common_size is the size of the common structre array
+	if (ALen <= BLen){
+		common_size = ALen;
+	}
+	else{
+		common_size = BLen;
+	}
+
+	//common array is for storing structures with common dates
+	struct transaction *common = (struct transaction *)malloc(common_size*sizeof(struct transaction));
+
+	for (i = 0; i < ALen; i++){
+		for (j = 0; j < BLen; j++){
+			if(is_equal(A[i].date, B[j].date)){
+				common[k++]=A[i];                      //if two dates are equal then copy the structure two common structure
+			}
+		}
+	}
+
+	//if no common elements
+	if (k == 0) 
+		return NULL;
+
+	//if common elements
+	return common;
+}
+int is_equal(char *s1, char *s2){
+	//returns 1 if two strings i.e, dates are equal,else return 0
+	int i, j;
+	for (i = 0; s1[i] != '\0'&&s2[i]!='\0'; i++){
+		if (s1[i] != s2[i])//if mismatch
+			return 0;
+	}
+	return 1;//two strings are equal
 }
